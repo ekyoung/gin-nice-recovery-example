@@ -10,12 +10,13 @@ func main() {
     router := gin.New()      // gin.Default() installs gin.Recovery() so use gin.New() instead
     router.Use(gin.Logger()) // Install the default logger, not required
 
-    // Install nice.Recovery, passing the name of the html template to render, and data to use
+    // Install nice.Recovery, passing the handler to call after recovery
     router.Use(nice.Recovery(recoveryHandler))
 
     // Load templates as usual
     router.LoadHTMLFiles("error.tmpl")
 
+    // Define routes as usual
     router.GET("/", func(c *gin.Context) {
         panic("Doh!")
     })
